@@ -21,6 +21,12 @@ pipeline{
         sh 'mvn -Dmaven.test.failure.ignore=true clean package'
       }
     }
-
+    stage ('Docker Image')
+    {
+      steps
+      {
+        //docker 
+      }
+    }
   }
 }
