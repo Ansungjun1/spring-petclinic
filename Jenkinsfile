@@ -31,7 +31,6 @@ pipeline{
             docker tag ansungjun/spring-petclinic:$BUILD_NUMBER ansungjun/spring-petclinic:latest
           """
         }
-        sh 'Docker 
       }
     }
   }
