@@ -13,6 +13,14 @@ pipeline{
         git url: 'https://github.com/Ansungjun1/spring-petclinic.git', branch: 'main'
       }
     }
+    stage ('Maven Build')
+    {
+      steps
+      {
+        echo 'Maven Build'
+        sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+      }
+    }
 
   }
 }
