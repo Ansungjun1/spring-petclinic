@@ -52,7 +52,7 @@ pipeline{
       steps
       {
         sh """
-          docker rmi ansungjun/spring-petclinic:BUILD_NUMBER
+          docker rmi ansungjun/spring-petclinic:$BUILD_NUMBER
           docker rmi ansungjun/spring-petclinic:latest
         """
       }
