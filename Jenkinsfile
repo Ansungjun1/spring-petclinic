@@ -25,7 +25,13 @@ pipeline{
     {
       steps
       {
-        //docker 
+        dir("${env.WORKSPACE"}){
+          sh """
+            docker buld -t ansungjun/spring-petclinic:$BUILD_NUMBER .
+            docker tag ansungjun/spring-petclinic:$BUILD_NUMBER ansungjun/spring-petclinic:latest
+          """
+        }
+        sh 'Docker 
       }
     }
   }
