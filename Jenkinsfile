@@ -21,5 +21,38 @@ pipeline{
           branch: 'main', credentialsId: 'GIT_CREDENTIALS'
       }
     }
+    stage('Maven Build'){
+      steps{
+        echo 'Maven Build'
+        sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+      }
+    }
+    stage('Docker Image Build'){
+      steps{
+        echo 'Docker Iamge Build'
+        dir("${env.WORKSPACE}"){
+          sh """
+          docker build -t ansungjun/spring-petclinic:$BUILD_NUMBER .
+          docker tag ansungjun/spring-petclinic:$BUILD_NUMBER ansungjun/spring-petclinic:latest
+          """
+        }
+      }
+    }
+    stage('Docker Login'){
+      steps{
+        sh """
+        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+        docker push ansungjun/spring-petclinic:latest
+        """
+      }
+    }
+    stage('Remove Docker Image'){
+      steps{
+        sh """
+        docker rmi ansungjun/spring-petclinic:$BUILD_NUMBER
+        docker rmi ansungjun/spring-petclinic:latest
+        """
+      }
+    }
   }
 }
