@@ -9,7 +9,7 @@ pipeline{
   environment{
     DOCKERHUB_CREDENTIALS = credentials('dockerCredential')
     AWS_CREDENTIALS = credentials('AWSCredential')
-    GIT_CREDENTIALS = credentials('gCredential')
+    GIT_CREDENTIALS = credentials('gitCredential')
     REGION = 'ap-northeast-2'
   }
 
